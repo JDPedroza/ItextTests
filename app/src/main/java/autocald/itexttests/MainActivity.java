@@ -15,9 +15,6 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private String[]headers={"Id", "Nombre", "Apellido"};
-    private String shortText="Prueba";
-    private String longText="Este es un texto largo de prueba";
     private TemplatePDF templatePDF;
     private Button btnOpen;
     private Button btnSend;
@@ -37,10 +34,13 @@ public class MainActivity extends AppCompatActivity {
         templatePDF=new TemplatePDF(getApplicationContext());
         templatePDF.openDocument();
         templatePDF.addMetaData("clientes", "ventas", "Johan");
+        /*
         templatePDF.addTitles("Tienda", "Clientes", "20/06/19");
         templatePDF.addParagraph(shortText);
         templatePDF.addParagraph(longText);
         templatePDF.createTable(headers, getClients());
+        */
+        templatePDF.createTable();
         templatePDF.closeDocument();
         btnOpen.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -57,14 +57,6 @@ public class MainActivity extends AppCompatActivity {
     }
     public void appViewPDF(){
         templatePDF.appViewPDF(this);
-    }
-    private ArrayList<String[]>getClients(){
-        ArrayList<String[]> rows= new ArrayList<>();
-        rows.add(new String[]{"1", "Pedro", "Lopez"});
-        rows.add(new String[]{"2", "Juan", "Sanchez"});
-        rows.add(new String[]{"3", "Johan", "Pedroza"});
-        rows.add(new String[]{"4", "Lucas", "Gomez"});
-        return rows;
     }
     public void appSendPDF(){
         String[] mailto = {""};
